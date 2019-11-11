@@ -1,0 +1,50 @@
+import string
+def isWordGuessed(secretWord, lettersGuessed):
+    for x in secretWord:
+        if x in lettersGuessed:
+            bloo = True
+            continue
+        else:
+            bloo = False
+            break
+    return bloo
+def getGuessedWord(secretWord, lettersGuessed):
+    isGuessed = secretWord
+    for x in isGuessed:
+        if x in lettersGuessed:
+            continue
+        else:
+            isGuessed = isGuessed.replace(x, "[]")
+    return isGuessed
+
+def getAvailableLetters(lettersGuessed):
+    availableLetters = string.ascii_lowercase
+    for x in lettersGuessed:
+            availableLetters = availableLetters.replace(x, '[]')
+    return availableLetters
+
+def Hangaroo(secretWord):
+    mistakesMade = 0
+    lettersGuessed = set()
+    i = 1
+    while  i == 1:
+        imput = input('Input letter here: ')
+        while len(imput) > 1 or imput in lettersGuessed:
+            if imput in lettersGuessed:
+                print('This has already been guessed - so try again!')
+            else:
+                print('This is not a letter! Try again!')
+            imput = input('Input letter here: ')
+        lettersGuessed.add(imput)
+        if imput in secretWord:
+            mistakesMade = mistakesMade
+        else:
+            mistakesMade = mistakesMade + 1
+        print(getGuessedWord(secretWord, lettersGuessed))
+        print(getAvailableLetters(lettersGuessed))
+        print(mistakesMade)
+        print(isWordGuessed(secretWord, lettersGuessed))
+        if isWordGuessed(secretWord, lettersGuessed) == True:
+            i = 0
+    print('Congratulations!') 
+Hangaroo('uste')
